@@ -23,7 +23,21 @@ public class Meta {
         }
     }
 
+    @MyAnno(str = "Annotation Example2", val = 19)
+    public static void myMeth2(String str, int i){
+        Meta ob = new Meta();
+
+        Class<?> c = ob.getClass();
+        try {
+            Method m = c.getMethod("myMeth2", String.class, int.class);
+            MyAnno anno = m.getAnnotation(MyAnno.class);
+            System.out.println(anno.str() + "   " + anno.val());
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args){
-        myMeth();
+        myMeth2("test",10);
     }
 }
